@@ -5,7 +5,7 @@ https://www.youtube.com/watch?v=wIZamzt7MkM
 ## STEP 1: Installing kubeadm
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 
-_All STEP 1 actions have to be performed both control plane and worker nodes._
+&emsp;_All **STEP 1** actions have to be performed in both control plane and worker nodes._
 
 ### I - VM Requirements
 - 2GB of RAM
@@ -76,29 +76,47 @@ kubectl get node -o wide
 
 ### VII - Add worker nodes
 
-You have to use the _kubeadm join_ command that appears as reult of _kubeadm init_ command executed on master node.
+&emsp;You have to use the _kubeadm join_ command that appears as reult of _kubeadm init_ command executed on master node.
 
 ### VIII - Change workers INTERNAL IP addresses
 
-Just like you change control plane INTERNAL IP address.
+&emsp;Just like you change control plane INTERNAL IP address.
 
 ## STEP 4: Install a Pod network add-on
 
-I chose flannel.
+&emsp;I chose flannel.
 
 **1. Got to the github falnnel page:** https://github.com/flannel-io/flannel
 
-**2. Deploy flannel with kubectl:** See the command at https://github.com/flannel-io/flannel
+**2. Download the manifest _kube-flannel.yml_ to the master node**
 
-You need to download the manifest and change some values like: _"Network": "10.200.0.0/10"_
+**3. Edit this manifest and change _"Network"_ value**
 
-This _"Network"_ value have to be the same defined by _kubeadm init_ command
+&emsp;_"Network"_ value have to be the same defined by flag _pod-network-cidr_ in _kubeadm init_ command. Like this: ```"Network": "10.200.0.0/10"```
 
-**3. Verify if the _iface_ flag corresponds to the name of the interface of the INTERNAL IP mater node interface**
+Deploy flannel with kubectl:** See the command at https://github.com/flannel-io/flannel
 
-
-**XXX. Apply and check the creation of Pods:**
+**4. Verify if the _iface_ flag of the manifest corresponds to the name of the interface of the INTERNAL IP mater node interface**
+```
+ip a
 ```
 ```
+...
+containers:
+- args:
+  - --ip-masq
+  - --kube-subnet-mgr
+  - --iface=enp0s8
+```
+&emsp;If _iface_ flag is different, change it.
 
-## STEP 5: Now your cluster is up and you can deploy applications
+**5. Apply and check the creation of Pods:**
+```
+curl -L https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml -o kube-flannel.yml
+```
+
+## STEP 5: Now test the cluster
+
+**1. Create several Pods**
+**2. Deploy your application**
+**3. Test your application""
