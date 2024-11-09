@@ -87,12 +87,18 @@ Just like you change control plane INTERNAL IP address.
 I chose flannel.
 
 **1. Got to the github falnnel page:** https://github.com/flannel-io/flannel
+
 **2. Deploy flannel with kubectl:** See the command at https://github.com/flannel-io/flannel
-You need to donload the manifest and change some values like: _"Network": "10.200.0.0/10"_
+
+You need to download the manifest and change some values like: _"Network": "10.200.0.0/10"_
 
 This _"Network"_ value have to be the same defined by _kubeadm init_ command
-**3. Apply and check the creation of Pods:**
-```
 
+**3. Verify if the _iface_ flag corresponds to the name of the interface of the INTERNAL IP mater node interface**
+
+
+**XXX. Apply and check the creation of Pods:**
+```
+```
 
 ## STEP 5: Now your cluster is up and you can deploy applications
