@@ -37,6 +37,8 @@ sudo systemctl status containerd
 ### IV - Install kubeadm, kubelet, and kubectl
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 
+## STEP 2: Only in master node
+
 ### V - Create a cluster with kubeadm
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
 ```
@@ -48,7 +50,7 @@ This command is like below:
 ```
 kubeadm join <api-server-ip:port> --token <token-value> --discovery-token-ca-cert-hash sha256:<hash value>
 ```
-### Verify the INTERNAL IP of the control plane running the command:
+### VI - Verify the INTERNAL IP of the control plane running the command:
 ```
 kubectl get node -o wide
 ```
@@ -69,3 +71,7 @@ Then restart kubelet and verify control plane INTERNAL IP with the commands:
 sudo systemctl restart kubelet
 kubectl get node -o wide
 ```
+
+## STEP 3: Only in worker nodes
+
+### VII - Adding worker nodes
