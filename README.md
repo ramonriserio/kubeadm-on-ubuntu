@@ -15,7 +15,7 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-ku
 https://kubernetes.io/docs/setup/production-environment/container-runtimes/
 
 **1.** Enable IPv4 packet forward
-2. Install containerd
+**2.** Install containerd
 => teste
      -> docker.com
        > Docs
