@@ -74,4 +74,14 @@ kubectl get node -o wide
 
 ## STEP 3: Only in worker nodes
 
-### VII - Adding worker nodes
+### VII - Add worker nodes
+
+You have to use the _kubeadm join_ command that appears as reult of _kubeadm init_ command executed on master node.
+
+### VIII - Change workers INTERNAL IP addresses
+
+Just like you change control plane INTERNAL IP address.
+
+### STEP 4: Install a Pod network add-on
+
+I chose flannel.
