@@ -17,6 +17,7 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-ku
 https://kubernetes.io/docs/setup/production-environment/container-runtimes/
 
 **1. Enable IPv4 packet forward**
+
 **2. Install containerd**
 
 - docker.com
@@ -27,7 +28,7 @@ https://kubernetes.io/docs/setup/production-environment/container-runtimes/
 - Installing using apt repository
 - Steps 1 and 2 for **containerd.io**
 
-### III - cgroup drivers ###
+**3 - cgroup drivers**
 ```
 containerd config default | sed 's/SystemdCgroup=false/SystemdCgroup=true/' | sed 's/sandbox_image = "registry.k8s.io\/pause:3.6"/sandbox_image = "registry.k8s.io\/pause:3.9"/' | sudo tee /etc/containerd/config.toml
 sudo systemctl restart containerd
@@ -44,9 +45,9 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-clu
 ```
 kubeadm init --pod-network-cidr=10.200.0.0/16 --apiserver-advertise-address=<CONTROL PLANE IP>
 ```
-Then copy and paste the command after the text "To start using your cluster, you need to run the following as a regular user:"
+&emsp;Then copy and paste the command after the text "To start using your cluster, you need to run the following as a regular user:"
 
-This command is like below:
+&emsp;This command is like below:
 ```
 kubeadm join <api-server-ip:port> --token <token-value> --discovery-token-ca-cert-hash sha256:<hash value>
 ```
@@ -54,19 +55,19 @@ kubeadm join <api-server-ip:port> --token <token-value> --discovery-token-ca-cer
 ```
 kubectl get node -o wide
 ```
-The **INTERNAL IP** have to be equal to the **node IP**. If they are differente, your host probably have more than one netwwork interface and kubeadm chose the wrong IP and you need to change it.
+&emsp;The **INTERNAL IP** have to be equal to the **node IP**. If they are differente, your host probably have more than one netwwork interface and kubeadm chose the wrong IP and you need to change it.
 
-To change the INTERNAL IP you need to add one more node IP value in kubeadm arguments and restart.
+&emsp;To change the INTERNAL IP you need to add one more node IP value in kubeadm arguments and restart.
 
-First, type the command to edit the environment flag file of kubeadm:
+&emsp;First, type the command to edit the environment flag file of kubeadm:
 ```
 sudo vi /var/lib/kubelet/kubeadm-flags.env
 ```
-Then add the node IP like below:
+&emsp;Then add the node IP like below:
 ```
 KUBELET_KUBEADM_ARGS="--node-ip=<NODE IP> --container-runtime-endpoint=unix:///var/run/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.10"
 ```
-Then restart kubelet and verify control plane INTERNAL IP with the commands:
+&emsp;Then restart kubelet and verify control plane INTERNAL IP with the commands:
 ```
 sudo systemctl restart kubelet
 kubectl get node -o wide
@@ -76,7 +77,7 @@ kubectl get node -o wide
 
 ### VII - Add worker nodes
 
-&emsp;You have to use the _kubeadm join_ command that appears as reult of _kubeadm init_ command executed on master node.
+&emsp;You have to use the _kubeadm join_ command that appears as result of _kubeadm init_ command executed on master node.
 
 ### VIII - Change workers INTERNAL IP addresses
 
@@ -94,7 +95,6 @@ kubectl get node -o wide
 
 &emsp;_"Network"_ value have to be the same defined by flag _pod-network-cidr_ in _kubeadm init_ command. Like this: ```"Network": "10.200.0.0/10"```
 
-Deploy flannel with kubectl:** See the command at https://github.com/flannel-io/flannel
 
 **4. Verify if the _iface_ flag of the manifest corresponds to the name of the interface of the INTERNAL IP mater node interface**
 ```
@@ -115,8 +115,10 @@ containers:
 curl -L https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml -o kube-flannel.yml
 ```
 
-## STEP 5: Now test the cluster
+## STEP 5: Now, test the cluster
 
 **1. Create several Pods**
+
 **2. Deploy your application**
-**3. Test your application""
+
+**3. Test your application**
