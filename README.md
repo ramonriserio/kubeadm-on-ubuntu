@@ -82,6 +82,6 @@ You have to use the _kubeadm join_ command that appears as reult of _kubeadm ini
 
 Just like you change control plane INTERNAL IP address.
 
-### STEP 4: Install a Pod network add-on
+## STEP 4: Install a Pod network add-on
 
 I chose flannel.
