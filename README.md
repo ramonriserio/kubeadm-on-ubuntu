@@ -14,4 +14,14 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-ku
 ### II - Install a container runtime
 https://kubernetes.io/docs/setup/production-environment/container-runtimes/
 
-1. Enable IPv4 packet forward
+**1. Enable IPv4 packet forward**
+**2. Install containerd**
+     > docker.com
+       > Docs
+         > Docker Engine
+           > Install Docker Engine
+             > Ubuntu
+               > Installing using apt repository
+                 > Steps 1 and 2 for **containerd.io**
+
+### III - cgroup drivers ###
