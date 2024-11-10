@@ -56,8 +56,8 @@ echo \
 sudo apt-get update
 ```
 2.2 - Install the Docker packages.
-```
 To install the latest version, run:
+```
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 **3 - cgroup drivers**
