@@ -37,9 +37,9 @@ https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 - Installing using apt repository
 - Steps 1 and 2 for **containerd.io**
 
-Before you install Docker Engine for the first time on a new host machine, you need to set up the Docker apt repository. Afterward, you can install and update Docker from the repository.
+&emsp;Before you install Docker Engine for the first time on a new host machine, you need to set up the Docker apt repository. Afterward, you can install and update Docker from the repository.
 
-2.1 - Set up Docker's apt repository.
+&emsp;2.1 - Set up Docker's apt repository.
 ```
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -55,8 +55,9 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 ```
-2.2 - Install the Docker packages.
-To install the latest version, run:
+&emsp;2.2 - Install the Docker packages.
+
+&emsp;&emsp;To install the latest version, run:
 ```
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
