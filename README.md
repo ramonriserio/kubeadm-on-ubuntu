@@ -61,7 +61,15 @@ sudo apt-get update
 ```
 sudo apt-get install containerd.io
 ```
-**3 - cgroup drivers**
+**3 - Configure kubelet and container runtime cgroup drivers**
+
+On Linux, control groups are used to constrain resources that are allocated to processes.
+
+Both the kubelet and the underlying container runtime (containerd) need to interface with control groups to enforce resource management for pods and containers and set resources such as cpu/memory requests and limits. To interface with control groups, the kubelet and the container runtime need to use a cgroup driver. It's critical that the kubelet and the container runtime use the same cgroup driver and are configured the same.
+
+The cgroupfs driver is the default cgroup driver in the kubelet. When the cgroupfs driver is used, the kubelet and the container runtime directly interface with the cgroup filesystem to configure cgroups.
+
+The cgroupfs driver is not recommended when systemd is the init system because systemd expects a single cgroup manager on the system.
 ```
 containerd config default | sed 's/SystemdCgroup=false/SystemdCgroup=true/' | sed 's/sandbox_image = "registry.k8s.io\/pause:3.6"/sandbox_image = "registry.k8s.io\/pause:3.9"/' | sudo tee /etc/containerd/config.toml
 sudo systemctl restart containerd
