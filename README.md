@@ -55,11 +55,11 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 ```
-&emsp;2.2 - Install the Docker packages.
+&emsp;2.2 - Install containerd package.
 
 &emsp;&emsp;To install the latest version, run:
 ```
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get install containerd.io
 ```
 **3 - cgroup drivers**
 ```
