@@ -10,7 +10,7 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-ku
 ### I - VM Requirements
 - 2GB of RAM
 - 2 CPUs for control plane machines
-- Disabled **swap** just now: _sudo swapoff -a_
+- Disabled **swap** just now: ```sudo swapoff -a```
 - Disabled **swap** permanently: Comment the swap line in the _/etc/fstab_ file
 
 ### II - Install a container runtime
