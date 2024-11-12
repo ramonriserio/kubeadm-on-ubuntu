@@ -27,15 +27,13 @@ EOF
 # Apply sysctl params without reboot
 sudo sysctl --system
 ```
+&emsp;Verify that net.ipv4.ip_forward is set to 1 with:
+```
+sysctl net.ipv4.ip_forward
+```
 **2. Install containerd**
+
 https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
-- docker.com
-- Docs
-- Docker Engine
-- Install Docker Engine
-- Ubuntu
-- Installing using apt repository
-- Steps 1 and 2 for **containerd.io**
 
 &emsp;Before you install Docker Engine for the first time on a new host machine, you need to set up the Docker apt repository. Afterward, you can install and update Docker from the repository.
 
@@ -71,7 +69,9 @@ The cgroupfs driver is the default cgroup driver in the kubelet. When the cgroup
 
 The cgroupfs driver is not recommended when systemd is the init system because systemd expects a single cgroup manager on the system.
 ```
-containerd config default | sed 's/SystemdCgroup=false/SystemdCgroup=true/' | sed 's/sandbox_image = "registry.k8s.io\/pause:3.6"/sandbox_image = "registry.k8s.io\/pause:3.9"/' | sudo tee /etc/containerd/config.toml
+# containerd config default | sed 's/SystemdCgroup=false/SystemdCgroup=true/' | sed 's/sandbox_image = "registry.k8s.io\/pause:3.6"/sandbox_image = "registry.k8s.io\/pause:3.9"/' | sudo tee /etc/containerd/config.toml
+
+containerd config default | sed 's/SystemdCgroup = false/SystemdCgroup = true/' | sed 's/sandbox_image = "registry.k8s.io\/pause:3.10"/sandbox_image = "registry.k8s.io\/pause:3.10"/' | sudo tee /etc/containerd/config.toml
 sudo systemctl restart containerd
 sudo systemctl status containerd
 ```
