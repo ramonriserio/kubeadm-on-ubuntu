@@ -71,7 +71,7 @@ The cgroupfs driver is not recommended when systemd is the init system because s
 ```
 # containerd config default | sed 's/SystemdCgroup=false/SystemdCgroup=true/' | sed 's/sandbox_image = "registry.k8s.io\/pause:3.6"/sandbox_image = "registry.k8s.io\/pause:3.9"/' | sudo tee /etc/containerd/config.toml
 
-containerd config default | sed 's/SystemdCgroup = false/SystemdCgroup = true/' | sed 's/sandbox_image = "registry.k8s.io\/pause:3.10"/sandbox_image = "registry.k8s.io\/pause:3.10"/' | sudo tee /etc/containerd/config.toml
+containerd config default | sed 's/SystemdCgroup = false/SystemdCgroup = true/' | sed 's/sandbox_image = "registry.k8s.io\/pause:3.8"/sandbox_image = "registry.k8s.io\/pause:3.10"/' | sudo tee /etc/containerd/config.toml
 sudo systemctl restart containerd
 sudo systemctl status containerd
 ```
@@ -183,7 +183,9 @@ sudo kubeadm token create --print-join-command
 **1. Got to the github falnnel page:** https://github.com/flannel-io/flannel
 
 **2. Download the manifest _kube-flannel.yml_ to the master node**
-
+```
+curl -fsSL https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml -o kube-flannel.yml
+```
 **3. Edit this manifest and change _"Network"_ value**
 
 &emsp;_"Network"_ value have to be the same defined by flag _pod-network-cidr_ in _kubeadm init_ command. Like this: ```"Network": "10.200.0.0/10"```
