@@ -111,13 +111,18 @@ sudo apt-mark hold kubelet kubeadm kubectl
 ```
 sudo systemctl enable --now kubelet
 ```
-## STEP 2: Only in master node
+## STEP 2: Only on the master node
 
 ### V - Create a cluster with kubeadm
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+
+To initialize the control-plane node run:
 ```
 kubeadm init --pod-network-cidr=10.200.0.0/16 --apiserver-advertise-address=<CONTROL PLANE IP>
 ```
+[!NOTE]
+Chante <CONTROL PLANE IP> for your node IP.
+
 &emsp;Then copy and paste the command after the text "To start using your cluster, you need to run the following as a regular user:"
 
 &emsp;This command is like below:
@@ -146,7 +151,7 @@ sudo systemctl restart kubelet
 kubectl get node -o wide
 ```
 
-## STEP 3: Only in worker nodes
+## STEP 3: Only on the worker nodes
 
 ### VII - Add worker nodes
 
