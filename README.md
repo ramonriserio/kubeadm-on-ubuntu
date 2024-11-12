@@ -120,14 +120,24 @@ To initialize the control-plane node run:
 ```
 kubeadm init --pod-network-cidr=10.200.0.0/16 --apiserver-advertise-address=<CONTROL PLANE IP>
 ```
-[!NOTE]
-Chante <CONTROL PLANE IP> for your node IP.
+> [!NOTE]
+> Change <<CONTROL PLANE IP>> for your node IP.
 
 &emsp;Then copy and paste the command after the text "To start using your cluster, you need to run the following as a regular user:"
 
 &emsp;This command is like below:
 ```
 kubeadm join <api-server-ip:port> --token <token-value> --discovery-token-ca-cert-hash sha256:<hash value>
+```
+&emsp;To start using your cluster, you need to run the following as a regular user: 
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+&emsp;Alternatively, if you are the root user, you can run:
+```
+  export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
 ### VI - Verify the INTERNAL IP of the control plane running the command:
 ```
@@ -156,6 +166,11 @@ kubectl get node -o wide
 ### VII - Add worker nodes
 
 &emsp;You have to use the _kubeadm join_ command that appears as result of _kubeadm init_ command executed on master node.
+
+&emsp;To recover kubeadm join command do:
+```
+sudo kubeadm token create --print-join-command
+```
 
 ### VIII - Change workers INTERNAL IP addresses
 
