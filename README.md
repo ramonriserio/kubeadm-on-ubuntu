@@ -207,7 +207,7 @@ containers:
 
 **5. Apply and check the creation of Pods:**
 ```
-kubedtl apply -f kube-flannel.yml
+kubectl apply -f kube-flannel.yml
 ```
 
 ## STEP 5: Now, test the cluster
